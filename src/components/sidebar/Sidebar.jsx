@@ -15,11 +15,13 @@ import NavItem from "../navItem/NavItem";
 
 const navbar = [
   {
+    id: 1,
     to: "/",
     icon: MdHomeFilled,
     title: "dashboard",
   },
-  {
+  { 
+    id: 2,
     to: "/tours",
     icon: MdAttractions,
     title: "tours",
@@ -35,6 +37,7 @@ const navbar = [
     ],
   },
   {
+    id: 3,
     to: "/tickets",
     icon: MdAirplaneTicket,
     title: "tickets",
@@ -54,16 +57,19 @@ const navbar = [
     ],
   },
   {
+    id: 4,
     to: "/passengers",
     icon: MdPerson2,
     title: "passengers",
   },
   {
+    id: 5,
     to: "/coupons",
     icon: MdLoyalty,
     title: "coupons",
   },
   {
+    id: 6,
     to: "/reports",
     icon: MdLeaderboard,
     title: "reports",
@@ -72,7 +78,11 @@ const navbar = [
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(true);
-  const [showChild, setShowChild] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null);
+
+  const clickHandler = (id) => {
+     setSelectedItem(id);
+};
 
   return (
     <Flex
@@ -111,19 +121,19 @@ const Sidebar = () => {
                     <NavItem
                       item={item}
                       isOpen={isOpen}
-                      showChild={() => setShowChild(!showChild)}
+                      showChild={() => console.log(0);}
+                      onClick={clickHandler}
                     />
-                    {item.children.map((child) => {
+                    { item.children
+&& selectedItem === item.id && item.children.map((child) => {
                       return (
-                        showChild && (
                           <MenuGroup key={child.to}>
                             <NavItem
                               item={child}
                               isOpen={isOpen}
-                              showChild={() => setShowChild(!showChild)}
+                              showChild={() => console.log(0);}
                             />
                           </MenuGroup>
-                        )
                       );
                     })}
                   </>
@@ -131,7 +141,7 @@ const Sidebar = () => {
                   <NavItem
                     item={item}
                     isOpen={isOpen}
-                    showChild={() => setShowChild(!showChild)}
+                    showChild={() => console.log(0);}
                   />
                 )}
               </>
