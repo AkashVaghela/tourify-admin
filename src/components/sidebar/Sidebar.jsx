@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useState } from "react";
 import {
   Flex,
@@ -5,13 +6,9 @@ import {
   Text,
   Icon,
   Menu,
-  MenuList,
-  MenuItem,
-  Box,
   MenuGroup,
 } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
-import NavItem from "../navItem/NavItem";
 import {
   MdDashboard,
   MdAirplaneTicket,
@@ -20,67 +17,68 @@ import {
   MdPerson2,
   MdLogin,
 } from "react-icons/md";
-import { Link } from "react-router-dom";
+import NavItem from "../navItem/NavItem";
 
 const navbar = [
   {
     to: "/",
-    icon: <MdDashboard />,
+    icon: MdDashboard,
     title: "dashboard",
   },
   {
     to: "/tours",
-    icon: <MdAirplaneTicket />,
+    icon: MdAirplaneTicket,
     title: "tours",
     children: [
       {
-        to: "/cities",
+        to: "/tours/cities",
         title: "cities",
       },
       {
-        to: "/attractions",
+        to: "/tours/attractions",
         title: "attractions",
       },
     ],
   },
   {
     to: "/tickets",
-    icon: <MdAirplaneTicket />,
+    icon: MdAirplaneTicket,
     title: "tickets",
     children: [
       {
-        to: "/booked",
+        to: "/tickets/booked",
         title: "booked",
       },
       {
-        to: "/canceled",
+        to: "/tickets/canceled",
         title: "cancel",
       },
       {
-        to: "/refunds",
+        to: "/tickets/refunds",
         title: "refund",
       },
     ],
   },
   {
     to: "/passengers",
-    icon: <MdTour />,
+    icon: MdTour,
     title: "passengers",
   },
   {
     to: "/coupons",
-    icon: <MdAttractions />,
+    icon: MdAttractions,
     title: "coupons",
   },
   {
     to: "/reports",
-    icon: <MdPerson2 />,
+    icon: MdPerson2,
     title: "reports",
   },
 ];
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(true);
+  const [showChild, setShowChild] = useState(false);
 
   return (
     <Flex
@@ -103,46 +101,42 @@ const Sidebar = () => {
       </IconButton>
 
       <Flex flexDir="column" flexGrow="1" w="100%">
-        <Menu id="menu">
-          <MenuList>
-            {navbar.map((item) => {
-              console.log(item.to);
-              return (
-                <>
-                  {item.children ? (
-                    <MenuGroup key={item.to}>
-                      <MenuItem icon={item.icon}>
-                        <Link to={item.to}>{item.title}</Link>
-                      </MenuItem>
-                      {item.children.map((child) => {
-                        console.log(child.to);
-                        return (
-                          <MenuItem key={child.to}>
-                            <Link to={child.to}>{child.title}</Link>
-                          </MenuItem>
-                        );
-                      })}
-                    </MenuGroup>
-                  ) : (
-                    <MenuItem key={item.to} icon={item.icon}>
-                      <Link to={item.to}>{item.title}</Link>
-                    </MenuItem>
-                  )}
-                </>
-              );
-            })}
-          </MenuList>
+        <Menu>
+          {navbar.map((item) => {
+            return (
+              <>
+                {item.children ? (
+                  <>
+                    <NavItem
+                      item={item}
+                      showChild={() => setShowChild(!showChild)}
+                    />
+                    {item.children.map((child) => {
+                      return (
+                        showChild && (
+                          <MenuGroup key={child.to}>
+                            <NavItem
+                              item={child}
+                              showChild={() => setShowChild(!showChild)}
+                            />
+                          </MenuGroup>
+                        )
+                      );
+                    })}
+                  </>
+                ) : (
+                  <NavItem
+                    item={item}
+                    showChild={() => setShowChild(!showChild)}
+                  />
+                )}
+              </>
+            );
+          })}
         </Menu>
       </Flex>
 
-      <Flex
-        p={2}
-        gap="4"
-        width="100%"
-        rounded={4}
-        alignItems="center"
-        _hover={{ background: "teal.900" }}
-      >
+      <Flex p={2} gap="4" width="100%" rounded={4} alignItems="center">
         <Icon as={MdLogin} boxSize={6} color="gray.200" />
         {isOpen && (
           <Text
