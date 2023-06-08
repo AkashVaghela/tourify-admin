@@ -1,33 +1,27 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from "react";
-import {
-  Flex,
-  IconButton,
-  Text,
-  Icon,
-  Menu,
-  MenuGroup,
-} from "@chakra-ui/react";
+import { Flex, Text, Icon, Menu, MenuGroup, Box } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import {
-  MdDashboard,
-  MdAirplaneTicket,
-  MdTour,
+  MdHomeFilled,
   MdAttractions,
+  MdAirplaneTicket,
   MdPerson2,
+  MdLoyalty,
   MdLogin,
+  MdLeaderboard,
 } from "react-icons/md";
 import NavItem from "../navItem/NavItem";
 
 const navbar = [
   {
     to: "/",
-    icon: MdDashboard,
+    icon: MdHomeFilled,
     title: "dashboard",
   },
   {
     to: "/tours",
-    icon: MdAirplaneTicket,
+    icon: MdAttractions,
     title: "tours",
     children: [
       {
@@ -61,17 +55,17 @@ const navbar = [
   },
   {
     to: "/passengers",
-    icon: MdTour,
+    icon: MdPerson2,
     title: "passengers",
   },
   {
     to: "/coupons",
-    icon: MdAttractions,
+    icon: MdLoyalty,
     title: "coupons",
   },
   {
     to: "/reports",
-    icon: MdPerson2,
+    icon: MdLeaderboard,
     title: "reports",
   },
 ];
@@ -96,9 +90,16 @@ const Sidebar = () => {
       alignItems={isOpen ? "start" : ""}
       bg="teal.700"
     >
-      <IconButton mb={2} onClick={() => setIsOpen(!isOpen)}>
-        <Icon as={HamburgerIcon} boxSize={6} color="teal.600" />
-      </IconButton>
+      <Box ml={3} mb={6}>
+        <Icon
+          as={HamburgerIcon}
+          boxSize={6}
+          color="gray.200"
+          onClick={() => {
+            setIsOpen(!isOpen);
+          }}
+        />
+      </Box>
 
       <Flex flexDir="column" flexGrow="1" w="100%">
         <Menu>
@@ -109,6 +110,7 @@ const Sidebar = () => {
                   <>
                     <NavItem
                       item={item}
+                      isOpen={isOpen}
                       showChild={() => setShowChild(!showChild)}
                     />
                     {item.children.map((child) => {
@@ -117,6 +119,7 @@ const Sidebar = () => {
                           <MenuGroup key={child.to}>
                             <NavItem
                               item={child}
+                              isOpen={isOpen}
                               showChild={() => setShowChild(!showChild)}
                             />
                           </MenuGroup>
@@ -127,6 +130,7 @@ const Sidebar = () => {
                 ) : (
                   <NavItem
                     item={item}
+                    isOpen={isOpen}
                     showChild={() => setShowChild(!showChild)}
                   />
                 )}
