@@ -7,12 +7,12 @@ const NavItem = ({ to, icon, title, isOpen }) => {
   return (
     <NavLink to={to}>
       <Flex alignItems="center" gap="4">
-        {icon && <Icon as={icon} boxSize={6} color="teal.600" />}
+        {icon && <Icon as={icon} boxSize={6} color="gray.200" />}
         {isOpen && (
           <Text
             textTransform="capitalize"
             fs="lg"
-            color="gray.900"
+            color="gray.200"
             fontWeight="500"
           >
             {title}
