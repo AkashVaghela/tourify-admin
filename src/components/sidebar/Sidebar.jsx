@@ -121,17 +121,14 @@ const Sidebar = () => {
                     <NavItem
                       item={item}
                       isOpen={isOpen}
-                      showChild={() => console.log(0);}
                       onClick={clickHandler}
                     />
-                    { item.children
-&& selectedItem === item.id && item.children.map((child) => {
+                    { selectedItem === item.id && item.children.map((child) => {
                       return (
                           <MenuGroup key={child.to}>
                             <NavItem
                               item={child}
                               isOpen={isOpen}
-                              showChild={() => console.log(0);}
                             />
                           </MenuGroup>
                       );
@@ -141,8 +138,7 @@ const Sidebar = () => {
                   <NavItem
                     item={item}
                     isOpen={isOpen}
-                    showChild={() => console.log(0);}
-                  />
+                    />
                 )}
               </>
             );
