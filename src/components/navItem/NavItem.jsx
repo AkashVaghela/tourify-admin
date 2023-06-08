@@ -3,13 +3,10 @@ import React from "react";
 import { MenuItem, Text, Icon } from "@chakra-ui/react";
 import { NavLink } from "react-router-dom";
 
-const NavItem = ({ item, isOpen, showChild }) => {
+const NavItem = ({ item, isOpen }) => {
   return (
     <NavLink
       to={item.to}
-      onClick={() => {
-        item.children && showChild();
-      }}
     >
       <MenuItem
         mb={2}
