@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
+import Header from "../../components/header/Header";
 
 const CityTours = () => {
   return (
-    <div>CityTours</div>
-  )
-}
+    <>
+      <Header title="city tours" />
+    </>
+  );
+};
 
-export default CityTours
+export default CityTours;

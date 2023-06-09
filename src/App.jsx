@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter, useRoutes } from "react-router-dom";
-import { ChakraProvider } from "@chakra-ui/react";
+import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import Layout from "./components/layout/Layout";
 import Dashboard from "./pages/dashboard/Dashboard";
 import CityTours from "./pages/tours/CityTours";
@@ -12,6 +12,13 @@ import Passengers from "./pages/passengers/Passengers";
 import Coupons from "./pages/coupons/Coupons";
 import Reports from "./pages/reports/Reports";
 
+const customTheme = extendTheme({
+  fonts: {
+    body: "Poppins, sans-serif",
+    heading: "Poppins, sans-serif",
+  },
+});
+
 const Routes = () => {
   const routes = useRoutes([
     {
@@ -20,41 +27,45 @@ const Routes = () => {
       children: [
         {
           element: <Dashboard />,
-          index: true
+          index: true,
         },
         {
           path: "tours",
-          element: <CityTours />,
           children: [
             {
-              index: true,
+              path: "",
+              element: <CityTours />,
+            },
+            {
               path: "cities",
-              element: <CityTours />
+              element: <CityTours />,
             },
             {
               path: "attractions",
-              element: <AttractionTours />
-            }
-          ]
+              element: <AttractionTours />,
+            },
+          ],
         },
         {
           path: "tickets",
-          element: <BookedTickets />,
           children: [
             {
-              index: true,
+              path: "",
+              element: <BookedTickets />,
+            },
+            {
               path: "booked",
-              element: <BookedTickets />
+              element: <BookedTickets />,
             },
             {
               path: "canceled",
-              element: <CanceledTickets />
+              element: <CanceledTickets />,
             },
             {
               path: "refunds",
-              element: <RefundTickets />
-            }
-          ]
+              element: <RefundTickets />,
+            },
+          ],
         },
         {
           path: "passengers",
@@ -67,21 +78,21 @@ const Routes = () => {
         {
           path: "reports",
           element: <Reports />,
-        }
-      ]
-    }
+        },
+      ],
+    },
   ]);
   return routes;
 };
 
 const App = () => {
   return (
-    <ChakraProvider>
+    <ChakraProvider theme={customTheme}>
       <BrowserRouter>
         <Routes />
       </BrowserRouter>
     </ChakraProvider>
   );
-}
+};
 
 export default App;

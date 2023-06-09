@@ -1,7 +1,12 @@
 import React from "react";
+import Header from "../../components/header/Header";
 
 const AttractionTours = () => {
-  return <div>AttractionTours</div>;
+  return (
+    <>
+      <Header title="attractions" />
+    </>
+  );
 };
 
 export default AttractionTours;

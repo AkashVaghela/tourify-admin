@@ -1,7 +1,12 @@
 import React from "react";
+import Header from "../../components/header/Header";
 
 const CanceledTickets = () => {
-  return <div>CanceledTickets</div>;
+  return (
+    <>
+      <Header title="cancels" />
+    </>
+  );
 };
 
 export default CanceledTickets;

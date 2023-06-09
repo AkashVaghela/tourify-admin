@@ -1,7 +1,12 @@
 import React from "react";
+import Header from "../../components/header/Header";
 
 const RefundTickets = () => {
-  return <div>RefundTickets</div>;
+  return (
+    <>
+      <Header title="refunds" />
+    </>
+  );
 };
 
 export default RefundTickets;

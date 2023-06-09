@@ -5,10 +5,7 @@ import { NavLink } from "react-router-dom";
 
 const NavItem = ({ item, isOpen, onClick, isChild, chevronIcon }) => {
   return (
-    <NavLink
-      to={item.to}
-      onClick={() => onClick()}
-    >
+    <NavLink to={item.to} onClick={() => onClick()}>
       <MenuItem
         mb={2}
         key={item.to}
@@ -22,9 +19,8 @@ const NavItem = ({ item, isOpen, onClick, isChild, chevronIcon }) => {
         )}
         {isOpen && (
           <Text
-
             color="gray.200"
-            fontWeight={isChild ? "medium" : "semibold"}
+            fontWeight={isChild ? "normal" : "medium"}
             textTransform="capitalize"
           >
             {item.title}

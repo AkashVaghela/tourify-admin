@@ -1,7 +1,8 @@
 import React from "react";
+import Header from "../../components/header/Header";
 
 const Reports = () => {
-  return <div>Reports</div>;
+  return <Header title="reports" />;
 };
 
 export default Reports;

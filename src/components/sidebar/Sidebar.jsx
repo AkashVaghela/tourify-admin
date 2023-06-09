@@ -85,12 +85,9 @@ const Sidebar = () => {
   return (
     <Flex
       p="4"
-      mr="8"
-      left="5"
-      h="96vh"
-      mt="2vh"
+      left="0"
+      h="100vh"
       pos="sticky"
-      rounded="lg"
       boxShadow="md"
       overflow="hidden"
       flexDir="column"
@@ -121,15 +118,27 @@ const Sidebar = () => {
                       isOpen={isOpen}
                       onClick={() => {
                         setSelectedItem(item.id);
-                        setshowChild(!showChild)
+                        setshowChild(!showChild);
                       }}
-                      chevronIcon={showChild && selectedItem === item.id ? FiChevronDown : FiChevronRight}
+                      chevronIcon={
+                        showChild && selectedItem === item.id
+                          ? FiChevronDown
+                          : FiChevronRight
+                      }
                     />
                     {item.children.map((child) => {
-                      return selectedItem === item.id && showChild && (
-                        <MenuGroup key={child.to} >
-                            <NavItem item={child} isOpen={isOpen} isChild={true} showChild={showChild} />
-                        </MenuGroup>
+                      return (
+                        selectedItem === item.id &&
+                        showChild && (
+                          <MenuGroup key={child.to}>
+                            <NavItem
+                              item={child}
+                              isOpen={isOpen}
+                              isChild={true}
+                              showChild={showChild}
+                            />
+                          </MenuGroup>
+                        )
                       );
                     })}
                   </>
