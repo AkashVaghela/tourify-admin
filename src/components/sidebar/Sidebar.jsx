@@ -11,6 +11,7 @@ import {
   MdLogin,
   MdLeaderboard,
 } from "react-icons/md";
+import { FiChevronRight, FiChevronDown } from "react-icons/fi";
 import NavItem from "../navItem/NavItem";
 
 const navbar = [
@@ -20,7 +21,7 @@ const navbar = [
     icon: MdHomeFilled,
     title: "dashboard",
   },
-  { 
+  {
     id: 2,
     to: "/tours",
     icon: MdAttractions,
@@ -79,10 +80,7 @@ const navbar = [
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(true);
   const [selectedItem, setSelectedItem] = useState(null);
-
-  const clickHandler = (id) => {
-     setSelectedItem(id);
-};
+  const [showChild, setshowChild] = useState(false);
 
   return (
     <Flex
@@ -121,24 +119,22 @@ const Sidebar = () => {
                     <NavItem
                       item={item}
                       isOpen={isOpen}
-                      onClick={clickHandler}
+                      onClick={() => {
+                        setSelectedItem(item.id);
+                        setshowChild(!showChild)
+                      }}
+                      chevronIcon={showChild && selectedItem === item.id ? FiChevronDown : FiChevronRight}
                     />
-                    { selectedItem === item.id && item.children.map((child) => {
-                      return (
-                          <MenuGroup key={child.to}>
-                            <NavItem
-                              item={child}
-                              isOpen={isOpen}
-                            />
-                          </MenuGroup>
+                    {item.children.map((child) => {
+                      return selectedItem === item.id && showChild && (
+                        <MenuGroup key={child.to} >
+                            <NavItem item={child} isOpen={isOpen} isChild={true} showChild={showChild} />
+                        </MenuGroup>
                       );
                     })}
                   </>
                 ) : (
-                  <NavItem
-                    item={item}
-                    isOpen={isOpen}
-                    />
+                  <NavItem item={item} isOpen={isOpen} />
                 )}
               </>
             );
