@@ -4,7 +4,7 @@ import { Box, Flex, Heading, Avatar } from "@chakra-ui/react";
 
 const Header = ({ title }) => {
   return (
-    <Box pos="sticky" top="0" bg="white" p={2.5} boxShadow="base">
+    <Box pos="sticky" top="0" bg="white" p={3} boxShadow="base">
       <Flex alignItems={"center"} justifyContent={"space-between"}>
         <Heading
           as="h1"
